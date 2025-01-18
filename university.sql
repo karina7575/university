@@ -35,19 +35,19 @@ INSERT INTO course (number, id_faculty) values(4, 2);
 --Стоцкая Ирина Юрьевна, 4 курс экономического факультета, частник
 --Младич Настасья (без отчества), 1 курс экономического факультета, частник
 
-INSERT INTO student (student_name, student_surname, student_second_name, budget, id_course) 
+INSERT INTO student (student_surname, student_name, student_second_name, budget, id_course) 
 VALUES('Петров', 'Петр', 'Петрович', true, 1);
 
-INSERT INTO student (student_name, student_surname, student_second_name, budget, id_course)
+INSERT INTO student (student_surname, student_name, student_second_name, budget, id_course)
 VALUES('Иванов', 'Иван', 'Иваныч', false, 1);
 
-INSERT INTO student (student_name, student_surname, student_second_name, budget, id_course)
+INSERT INTO student (student_surname, student_name, student_second_name, budget, id_course)
 VALUES('Михно', 'Сергей', 'Иваныч', true, 3);
 
-INSERT INTO student (student_name, student_surname, student_second_name, budget, id_course)
+INSERT INTO student (student_surname, student_name, student_second_name, budget, id_course)
 VALUES('Стоцкая', 'Ирина', 'Юрьевна', false, 3);
 
-INSERT INTO student (student_name, student_surname, student_second_name, budget, id_course)
+INSERT INTO student (student_surname, student_name, student_second_name, budget, id_course)
 VALUES('Младич', 'Настасья', null, false, 2);
 
 -- Часть 3. Выборка данных. Необходимо написать запросы, которые выведут на экран:
@@ -61,6 +61,8 @@ WHERE faculty.price > 30000;
 
 -- 2. Перевести всех студентов Петровых на 1 курс экономического факультета.
 
+UPDATE student SET id_course = 2 WHERE student_surname = 'Петров';
+select * from student;
 
 -- 3. Вывести всех студентов без отчества или фамилии.
 
@@ -70,9 +72,12 @@ WHERE student_surname ISNULL OR student_second_name ISNULL;
 
 -- 4. Вывести всех студентов содержащих в фамилии или в имени или в отчестве "ван". (пример name like '%Петр%' - найдет всех Петров, Петровичей, Петровых)
 
+SELECT * FROM student
+WHERE student_surname LIKE 'ван' OR student_name LIKE 'ван' OR student_second_name LIKE '%ван%';
 
 -- 5. Удалить все записи из всех таблиц.
 
-drop table student;
-drop table course;
-drop table faculty;
+DELETE FROM student;
+DELETE FROM course;
+DELETE FROM faculty;
+
